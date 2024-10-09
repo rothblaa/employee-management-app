@@ -40,6 +40,11 @@ export class EmployeeFormComponent implements OnInit {
       if (id) {
         //editing current employee
         this.isEditing = true;
+
+        this.employeeService.getEmployeeById(Number(id)).subscribe({
+          next: (result) => this.employee = result,
+          error: (err) => console.error("Error loading employee", err)
+        })
       }
     })
   }
