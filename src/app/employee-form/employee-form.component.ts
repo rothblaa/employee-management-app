@@ -43,7 +43,7 @@ export class EmployeeFormComponent implements OnInit {
 
         this.employeeService.getEmployeeById(Number(id)).subscribe({
           next: (result) => this.employee = result,
-          error: (err) => console.error("Error loading employee", err)
+          error: (err) =>   this.errorMessage = `Error Occured (${err.status})`
         })
       }
     })
