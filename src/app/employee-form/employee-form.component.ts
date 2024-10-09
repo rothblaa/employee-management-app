@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Employee } from '../../models/employee';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -20,10 +21,16 @@ export class EmployeeFormComponent {
     position: ''
   }
 
+  constructor(private employeeService: EmployeeService) {}
+
   onSubmit(): void {
     console.log(this.employee);
 
     //logic to create another employee
+    this.employeeService.createEmployee(this.employee)
+      .subscribe((result) => {
+      console.log(result);
+    })
   }
 
 }
