@@ -50,19 +50,32 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.employee);
 
-    //logic to create another employee
+    if (this.isEditing) {
+      //logic to edit an employee
+    this.employeeService.editEmployee(this.employee)
+    .subscribe({
+      next: (response) => {
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error(err);
+        this.errorMessage = `Error Occured During Update: (${err.status})`;
+      }
+    });
+    } else {
+      //logic to create another employee
     this.employeeService.createEmployee(this.employee)
-      .subscribe({
-        next: (response) => {
-          this.router.navigate(['/']);
-        },
-        error: (err) => {
-          console.log(err);
-          this.errorMessage = `Error Occured: (${err.status})`;
-        }
-      });
+    .subscribe({
+      next: (response) => {
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.log(err);
+        this.errorMessage = `Error Occured During Creation: (${err.status})`;
+      }
+    });
+    }
   }
 
 }
