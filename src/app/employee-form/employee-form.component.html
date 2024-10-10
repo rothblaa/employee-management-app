@@ -4,7 +4,7 @@
   {{errorMessage}}
 </div>
 
-<form (ngSubmit)="onSubmit()" class="border rounded p-5 w-50 mb-5 mx-auto">
+<form (ngSubmit)="onSubmit()" #employeeForm="ngForm" class="border rounded p-5 w-50 mb-5 mx-auto">
   <div class="mb-3">
     <label class="form-label" for="firstName">First Name*: </label>
     <input required #firstName="ngModel" class="form-control" type="text" name="firstName" [(ngModel)]="employee.firstName" />
@@ -48,6 +48,5 @@
     </div>
   </div>
 
-
-  <button class="btn btn-primary btn-lg" type="submit">{{isEditing? 'Edit' : 'Create' }}</button>
+  <button class="btn btn-primary btn-lg" type="submit" [disabled]="employeeForm.invalid" >{{isEditing? 'Edit' : 'Create' }}</button>
 </form>
